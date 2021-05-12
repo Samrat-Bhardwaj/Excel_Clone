@@ -8,7 +8,36 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="menu-container">menu container</div>
+    <div class="menu-container">
+        <select class="font-size"> 
+            <option value="8">8</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="14">14</option>
+        </select>
+        <select class="font-family">
+            <option value="monospace">monospace</option>
+            <option value="sans-serif">sans-serif</option>
+            <option value="Georgia">Georgia</option>
+            <option value="fantasy">fantasy</option>
+        </select>
+        <div class="bui-container">
+            <input type="button" class="bold" value="B">
+            <input type="button" class="underline" value="U">
+            <input type="button" class="italic" value="I">
+        </div>
+
+        <div class="align-container">
+            <input type="button" class="left" value="L">
+            <input type="button" class="center" value="C">
+            <input type="button" class="right" value="R">
+        </div>
+         
+        <div class="color-container">
+            <input type="color" class="color">
+            <input type="color" class="bg-color">
+        </div>
+    </div>
     <div class="formula-container">
         <input type="text" class="address-input">
         <input type="text" class="formula-input">
@@ -21,10 +50,10 @@
     </div>
     <div class="sheet-container">
         <div class="add-btn-container">
-            <button>add</button>
+            add
         </div>
         <div class="sheet-list">
-            <div class="sheet 1 active" idx="0">Sheet1</div>
+            <div class="sheet 1 active" idx="0">Sheet 1</div>
         </div>
     </div>
     <script src="script.js"></script>

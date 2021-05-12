@@ -1,4 +1,3 @@
-let g=document.querySelector(".grid-container");
 let btnContainer=document.querySelector(".add-btn-container");
 let sheetList=document.querySelector(".sheet-list");
 let firstSheet=document.querySelector(".sheet");
