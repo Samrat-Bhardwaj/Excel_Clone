@@ -8,6 +8,7 @@ let italicBtn = document.querySelector(".italic");
 
 let fontSizeBtn = document.querySelector(".font-size");
 let alignBtn = document.querySelectorAll(".align-container");
+let formulaBar=document.querySelector(".formula-input");
 
 let rows = 100;
 let cols = 26;
@@ -58,6 +59,9 @@ for (let i = 0; i < rows; i++) {
       centerAlign: "normal",
       rightAlign: "normal",
       fontSize:8,
+      value:"",
+      formula:"",
+      children : [],
     };
     row.push(cell);
   }
@@ -161,13 +165,7 @@ for (let i = 0; i < alignBtn.length; i++) {
   });
 }
 
-function getClickedCell() {
-  let address = addressInput.value;
-  let cid = Number(address.charCodeAt(0)) - 65;
-  let rid = Number(address.slice(1)) - 1;
-  let cell = document.querySelector(`.cell[rid="${rid}"][cid="${cid}"]`);
-  return cell;
-}
+
 
 // so that zeroth cell is clicked on loading
 allCells[0].click();
