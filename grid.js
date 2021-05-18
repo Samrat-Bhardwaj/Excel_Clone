@@ -47,7 +47,66 @@ for (let i = 0; i < rows; i++) {
   g.appendChild(row);
 }
 
-let sheetDB = []; // making sheet DB which contains which cells have what properties
+// Adding sheet button 
+let sheetArr =[]; //-> THIS IS THE WHOLE 3D CONTAINER WHICH CONTAINS SHEETS
+let sheetDB; // -> Current Sheet
+
+let btnContainer=document.querySelector(".add-btn-container");
+let sheetList=document.querySelector(".sheet-list");
+let firstSheet=document.querySelector(".sheet");
+firstSheet.addEventListener("click",makeActive);
+
+firstSheet.click();
+
+
+
+btnContainer.addEventListener("click",function(){
+
+    let allSheets=document.querySelectorAll(".sheet");
+    let lastSheet=allSheets[allSheets.length-1];
+
+    let lastI=lastSheet.getAttribute("idx");
+    lastI=Number(lastI);
+
+    let newSheet=document.createElement("div");
+    newSheet.setAttribute("class","sheet");
+    newSheet.setAttribute("idx",`${lastI+1}`);
+    newSheet.innerText=`Sheet ${lastI+2}`;
+
+    sheetList.appendChild(newSheet);
+    for(let i=0; i<sheetList.length; i++){
+        allSheets[i].classList.remove("active");
+    }
+
+    // making out first sheet
+    createSheet();
+
+    // intialising sheetDB 
+    sheetDB=sheetArr[lastI];
+    newSheet.addEventListener("click",makeActive);
+})
+
+function makeActive(e){
+    let sheet=e.currentTarget;
+        let allSheets=document.querySelectorAll(".sheet");
+        for(let i=0; i<allSheets.length; i++){
+            allSheets[i].classList.remove("active");
+        }
+
+        sheet.classList.add("active");
+
+        // changing UI
+        let idx=sheet.getAttribute("idx");
+        if(!sheetArr[idx]){ // if it doesnt exist
+          createSheet();
+        }
+
+        sheetDB=sheetArr[idx];
+        setUi(); // function to change UI 
+}
+
+function createSheet(){
+  let newDB = []; // making sheet DB which contains which cells have what properties
 for (let i = 0; i < rows; i++) {
   let row = [];
   for (let j = 0; j < cols; j++) {
@@ -65,11 +124,26 @@ for (let i = 0; i < rows; i++) {
     };
     row.push(cell);
   }
-  sheetDB.push(row);
+  newDB.push(row);
+}
+sheetArr.push(newDB);
 }
 
+function setUi(){
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+        let elem = document.querySelector(`.grid .cell[rid='${i}'][cid='${j}']`);
+        let value = sheetDB[i][j].value;
+        elem.innerText = value;
+    }
+}
+formulaBar.value="";
+// allCells[0].click();// bug 
+}
+
+
 // event listeners to get address of cell which we clicked on
-let allCells = document.querySelectorAll(".cell");
+let allCells = document.querySelectorAll(".grid .cell");
 for (let i = 0; i < allCells.length; i++) {
   allCells[i].addEventListener("click", function () {
     let rid = allCells[i].getAttribute("rid");
@@ -96,6 +170,12 @@ for (let i = 0; i < allCells.length; i++) {
       ulBtn.classList.remove("active");
     } else {
       ulBtn.classList.add("active");
+    }
+
+    if(cellObject.formula){
+      formulaBar.value=cellObject.formula;
+    }else{
+      formulaBar.value="";
     }
   });
 }
