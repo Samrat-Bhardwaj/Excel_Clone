@@ -5,8 +5,13 @@ let g = document.querySelector(".grid");
 let boldBtn = document.querySelector(".bold");
 let ulBtn = document.querySelector(".underline");
 let italicBtn = document.querySelector(".italic");
+let fontFamily = document.querySelector(".font-family");
+let textcolor = document.querySelector(".text-color");
+let backgroundColor = document.querySelector(".backgroundcolor");
 
+let alignmentContainer=document.querySelectorAll(".align-container>*");
 let fontSizeBtn = document.querySelector(".font-size");
+let center=document.querySelector(".center");
 let alignBtn = document.querySelectorAll(".align-container");
 let formulaBar=document.querySelector(".formula-input");
 
@@ -114,13 +119,15 @@ for (let i = 0; i < rows; i++) {
       bold: "normal",
       italic: "normal",
       underlined: "normal",
-      leftAlign: "normal",
-      centerAlign: "normal",
-      rightAlign: "normal",
+      fontfamily:"sans-serif",
+      align:"center",
       fontSize:8,
       value:"",
       formula:"",
       children : [],
+      textColor:"#000000",
+      backgroundColor:"#000000",
+
     };
     row.push(cell);
   }
@@ -138,7 +145,7 @@ function setUi(){
     }
 }
 formulaBar.value="";
-// allCells[0].click();// bug 
+// allCells[0].click();// bug -> allcells upar ana chahiye
 }
 
 
@@ -177,7 +184,53 @@ for (let i = 0; i < allCells.length; i++) {
     }else{
       formulaBar.value="";
     }
+    let cell=getClickedCell();
+    let cellObj=cellObject;
+    let align=cellObj.align;
+    
+     if(align=="center"){
+         for(let j=0;j<alignmentContainer.length;j++){
+          alignmentContainer[j].classList.remove("active-btn");
+         }
+         center.classList.add("active-btn");
+         cell.style.textAlign="center";
+     }else if (align!="center"){
+         for(let j=0;j<alignmentContainer.length;j++){
+             if(align==alignmentContainer[j].classList[0]){
+                 alignmentContainer[j].classList.add("active-btn");
+                 cell.style.textAlign=align;
+             }else{
+                 alignmentContainer[j].classList.remove("active-btn");
+                 center.classList.remove("active-btn");
+             }
+         }
+     }
+     if(cellObj.fontfamily!="sans-serif"){
+      fontFamily.value=cellObj.fontfamily;
+      cell.style.fontFamily=cellObj.fontFamily;
+  }else{
+      fontFamily.value="sans-serif";
+      cell.style.fontFamily="sans-serif";
+  }
+  //text Color check
+  if(cellObj.textColor!="#000000"){
+      textcolor.value=cellObj.textColor;
+      cell.style.color=cellObj.textColor;
+  }else{
+      textcolor.value="#000000";
+      cell.style.color="#000000";
+  }
+  //background color check
+  if(cellObj.backgroundColor!="#000000"){
+      backgroundColor.value=cellObj.backgroundColor;
+      cell.style.background=cellObj.textColor;
+  }else{
+      backgroundColor.value="#000000";
+    //  cell.style.background="#000000";
+  }
   });
+
+  
 }
 
 // event listeners to change text styling of clicked cell
@@ -231,6 +284,79 @@ italicBtn.addEventListener("click", function () {
   }
 });
 
+textcolor.addEventListener("change",function(e){
+  let color=e.target.value;
+  let cell = getClickedCell();
+  // cell.style.fontStyle = "italic";
+  let rid = cell.getAttribute("rid");
+  let cid = cell.getAttribute("cid");
+  let cellObject = sheetDB[rid][cid];
+  // console.log("okay",color,"as",cellObject.textColor);
+  cellObject.textColor=color;
+})
+
+backgroundColor.addEventListener("change",function(e){
+  let color=e.target.value;
+  let uicellElement=getClickedCell();
+  uicellElement.style.backgroundColor=color;
+  let rid=uicellElement.getAttribute("rid");
+ let cid=uicellElement.getAttribute("cid");
+ let cellObj=sheetDB[rid][cid];
+ cellObj.backgroundColor=color;
+})
+
+fontFamily.addEventListener("change",function(){
+  let family=fontFamily.value;
+  let uicellElement=getClickedCell();
+  uicellElement.style.fontFamily=family;
+  let rid=uicellElement.getAttribute("rid");
+  let cid=uicellElement.getAttribute("cid");
+  let cellObj=sheetDB[rid][cid];
+  cellObj.fontfamily=family;
+})
+
+for(let i=0;i<alignmentContainer.length;i++){
+  
+  alignmentContainer[i].addEventListener("click",function(e){
+    
+      let align=e.currentTarget.classList[0];
+     let uicellElement=getClickedCell();
+     let rid=uicellElement.getAttribute("rid");
+     let cid=uicellElement.getAttribute("cid");
+     let cellObj=sheetDB[rid][cid];
+     
+     if(cellObj.align=="center"){
+          if(align!="center"){
+              for(let j=0;j<alignmentContainer.length;j++){
+                  alignmentContainer[j].classList.remove("active");
+              }
+           //   center.classList.remove("active-btn");
+              e.currentTarget.classList.add("active");
+              cellObj.align=align;
+              uicellElement.style.textAlign=align;
+            
+          }
+     }else if(cellObj.align!="center"){
+         if(cellObj.align==align){
+             e.currentTarget.classList.remove("active");
+             cellObj.align="center";
+             uicellElement.style.textAlign="center";
+             center.classList.add("active");
+         }else if(align!=cellObj.align){
+             
+          for(let j=0;j<alignmentContainer.length;j++){
+              alignmentContainer[j].classList.remove("active");
+          }
+        
+         // center.classList.remove("active-btn");
+          e.currentTarget.classList.add("active");
+          cellObj.align=align;
+          uicellElement.style.textAlign=align;
+         }
+     }
+  })
+  }
+
 fontSizeBtn.addEventListener("change", function () {
   let value = fontSizeBtn.value;
   let cell = getClickedCell();
@@ -240,12 +366,18 @@ fontSizeBtn.addEventListener("change", function () {
 for (let i = 0; i < alignBtn.length; i++) {
   alignBtn[i].addEventListener("click", function () {
     let cell = getClickedCell();
-    console.log(alignBtn[i].classList);
+    // console.log(alignBtn[i].classList);
     cell.style.textAlign = alignBtn[i].classList[i];
   });
 }
 
-
+function getClickedCell() {
+  let address = addressInput.value;
+  let cid = Number(address.charCodeAt(0)) - 65;
+  let rid = Number(address.slice(1)) - 1;
+  let cell = document.querySelector(`.cell[rid="${rid}"][cid="${cid}"]`);
+  return cell;
+}
 
 // so that zeroth cell is clicked on loading
 allCells[0].click();

@@ -7,18 +7,22 @@ body {
 }
 /* ============  MENU CONTAINER ============ */
 .menu-container {
-  background-color: lightpink;
+    background-color: #f5f6fa;;
   height: 3rem;
+  font-size: medium;
   display: flex;
   padding-left:2rem;
   align-items: center;
-  gap:0.5rem;
+  gap:2rem;
   /* justify-content: space-between; */
+}
+button {
+    background-color:white;
 }
 
 .menu-container>*{
     height: 70%;
-    border:1px solid;
+    /* border:1px solid; */
 }
 
 .font-size{
@@ -35,19 +39,96 @@ body {
     display: flex;
     gap:0.1rem;
     align-items: center;
+    
 }
 
 .bui-container>*{
     width:30%;
     height:80%;
     text-align: center;
+    min-width: 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1.2px solid;
+   border-radius: 5px;
+    height: 100%;
+    width:30%
 }
 .align-container{
-    width:14%;
+    min-width: 10rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
+.align-container>*{
+    border: 1.2px solid ;
+   border-radius: 5px;
+    height: 100%;
+    width:30%;
+}
+.left{
+    text-align: left;
+}
+.right{
+    text-align:right;
+}
+
+
 .color-container{
-    width:10%;
+    height: 60%;
+    /* min-width: 1rem; */
+    display: flex;
+    /* justify-content: left; */
+    /* align-items: left; */
+   /* gap: 4px; */
+   
 }
+.color-container>*{
+    border: 1px solid;
+    height: 100%;
+    width:50%;
+    border-radius: 4px;
+    gap: 4px;
+}
+
+.font-color{
+    padding-top: 3px;
+    text-align: left;
+    border-right: 1px solid;
+    
+}
+.backgroundcolor{
+    /* background-color:rgb(192, 30, 30); */
+    padding-top: 3px;
+    /* padding-right: 2px; */
+    text-align: right;
+}
+
+.nos{
+     border: 1px solid;
+     padding-top: 2px;
+     min-width: 7rem;
+     display: flex;
+     gap:0.2rem;
+     text-align: center;
+     margin-right: 20px;
+  }
+  .nos>*{
+      border: 1.2px solid;
+     border-radius: 5px;
+      height: 100%;
+      width:30%
+  }
+  .colon{
+      font-weight: bold;
+  }
+  .new{
+      border-right: 1px solid;
+  }
+  .save{
+      border-right: 1px solid;
+  }
 
 /*  ============  FORMULA CONTAINER ============ */
 .formula-container {
@@ -77,23 +158,26 @@ body {
 .grid-container{
   position: relative;
   /* after position relative i can change positions of its childrens */
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
   height: calc(100vh - ( 3rem + 2rem + 2rem));
   overflow: auto;
 }
 
 .left_box{
-    background-color:gray;
+    background-color:#dcdde1;
+    
 }
 
 .box{
     height: 2rem;
-    width:2rem;
-    border:1px solid;
+    width: 2rem;
     text-align: center;
+    border: 1px solid;
+    border-top: none;
 }
 
 .left_col{
+    background-color:#dcdde1;
     text-align: center;
 }
 
@@ -103,9 +187,10 @@ body {
     position: absolute;
     height:2rem;
    display:flex;
+   background-color:#dcdde1;
 }
 .grid{
-    background-color:rgb(248, 244, 244);
+    background-color:white;
     position: absolute;
     top: 2rem;
     left: 2rem;
@@ -126,23 +211,31 @@ body {
 
 .sheet-container {
   background-color: aqua;
+  
   height: 2rem;
+  /* height: 1.5rem; */
+    /* display: flex; */
+    background-color:#dcdde1;
   display: flex;
-  text-align: center;
-  align-items: space-between;
+  /* text-align: center;
+  align-items: space-between; */
 }
 
-.add-sheet_btn-container {
-    width: 3rem;
-    border: 1px solid;
+.add-btn-container {
+    display: flex;
     height: 100%;
-    padding-top: 0.2rem;
-    padding-left: 0.3rem;
+    width: 3rem;
+    /* align-items: center; */
+    /* justify-content: space-evenly; */
+    
+    font-size: 1.2rem;
+    color: darkgreen;
+    font-size: small;
 }
 
 .sheet-list {
     width: calc(100vw - 3rem);
-    border: 1px solid;
+    /* border: 1px solid; */
     display:flex;
     overflow: auto;
 }
@@ -150,17 +243,27 @@ body {
 .sheet-list::-webkit-scrollbar {
     display: none;
 }
+
   /* Hide scrollbar for IE, Edge and Firefox */
 .sheet-list {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
 .sheet {
-    min-width: 5rem;
-    border: 1px solid blue;
     height: 100%;
-    background-color: gray;
+    min-width:5rem;
+    /* border-bottom: 2px solid; */
+    padding-left: 12px;
+    padding-top: 2px;
+    font-size: small ;
 }
 .active{
-    background-color: white;
+    background-color: snow;
+    border-bottom:3px solid green;
+       color: darkgreen;
+       font-weight: bold;
+       font-size: medium;
+       border-left: 1px solid;
+       border-right: 1px solid;
+       /* font-size: large; */
 }

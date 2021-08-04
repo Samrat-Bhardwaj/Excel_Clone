@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Excel Sheet</title>
 </head>
 <body>
     <div class="menu-container">
@@ -21,35 +22,66 @@
             <option value="22">22</option>
         </select>
         <select class="font-family">
-            <option value="monospace">monospace</option>
-            <option value="sans-serif">sans-serif</option>
-            <option value="Georgia">Georgia</option>
-            <option value="fantasy">fantasy</option>
+                <option value="monospace">monospace</option>
+                <option value="sans-serif" selected>sans-serif</option>
+                <option value="Georgia">Georgia</option>
+                <option value="fantasy">fantasy</option>
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
         </select>
         <div class="bui-container">
-            <input type="button" class="bold" value="B">
-            <input type="button" class="underline" value="U">
-            <input type="button" class="italic" value="I">
+            <button class="bold">
+                <span class="material-icons-outlined material-icons">
+                    format_bold
+                </span>
+            </button>
+            <button class="underline">
+                <span class="material-icons-outlined material-icons">
+                    format_underlined
+                </span>
+            </button>
+            <button class="italic">
+                <span class="material-icons-outlined material-icons">
+                    format_italic
+                </span>
         </div>
 
         <div class="align-container">
-            <input type="button" class="left" value="L">
-            <input type="button" class="center" value="C">
-            <input type="button" class="right" value="R">
+            <button class="left">
+                <span class="material-icons-outlined material-icons">
+                    format_align_left
+                </span>
+            </button>
+            <button class="center">
+                <span class="material-icons-outlined material-icons">
+                    format_align_center
+                </span>
+            </button>
+            <button class="right">
+                <span class="material-icons-outlined material-icons">
+                    format_align_right
+                </span>
+            </button>
         </div>
          
         <div class="color-container">
-            <input type="color" class="color">
-            <input type="color" class="bg-color">
+            <div class="color font-color">
+                <i class="fas fa-palette"></i>
+                <input type="color" class="text-color"  > 
+            </div>
+            <div class="color backgroundcolor">
+                <i class="fas fa-fill"></i>
+                <input type="color" class="background-color">
+            </div>
         </div>
         <div class="nos-container">
             <span class="material-icons-outlined material-icons new">
-                add_circle_outline
+                note_add
             </span>
-            <span class="material-icons-outlined material-icons ">
+            <span class="material-icons-outlined material-icons open colon">
                 folder_open
             </span>
-            <input type="file" name="" class="open">
+            <!-- <input type="file" name="" class="open"> -->
             <span class="material-icons-outlined material-icons save">
                 file_download
             </span>
@@ -67,10 +99,12 @@
     </div>
     <div class="sheet-container">
         <div class="add-btn-container">
-            add
+            <span class="material-icons-outlined material-icons">
+                add_circle_outline
+                </span>
         </div>
         <div class="sheet-list">
-            <div class="sheet 1 active" idx="0">Sheet 1</div>
+            <div class="sheet 1 active" idx=0>Sheet 1</div>
         </div>
     </div>
     <script src="script.js"></script>
